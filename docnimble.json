@@ -1,0 +1,13 @@
+{
+  "name": "jesterjson",
+  "purpose": "library",
+  "repo_host_readme_url": "https://github.com/JohnAD/jesterjson",
+  "repo_host_docs_url": "https://github.com/JohnAD/jesterjson/blob/master/docs/",
+  "nimble_url": "https://nimble.directory/pkg/jesterjson",
+  "repo_support_url": "https://repo.support/gh/JohnAD/jesterjson",
+  "doc_dir": "docs/",
+  "rst_dir": "rst/",
+  "doc_src_dir": "extradocs/",
+  "nimble_file": "jesterjson.nimble",
+  "files_to_ignore": []
+}
