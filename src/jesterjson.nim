@@ -1,6 +1,7 @@
 import times
 import strutils
 import json
+import os
 
 import
   jester
@@ -51,10 +52,20 @@ import
 ##     * j["request"]["path"] is a string of the requests URL path name
 ##     * j["request"]["path"] is a string describing the request method (post, get, put, etc.)
 ##
-## * j["env"] TBD (will eventually contain various environment variables)
+## * j["env"] is an object of the OS environment variables
+##
+## * j["commandLineParams"] contains an array of the parameters passed to the server on startup
+##
 
 
-proc jsonDefault_before*(request: Request, response: ResponseData): JsonNode =  #SKIP!
+proc jsonDefault*(request: Request, response: ResponseData): JsonNode =
+  ## This is the psuedo-procedure to invoke to enable the library plugin.
+  ##
+  ## Once placed on the main router or ``routes``, the plugin is active on
+  ## all page routes.
+  ##
+  ## It creates a new object variable that is available to all routes including
+  ## any ``extend``-ed subrouters.
   # This is the "before" portion of the plugin. Do not run
   # this procedure directly, it is used by the plugin itself.
   result = newJObject()
@@ -88,10 +99,25 @@ proc jsonDefault_before*(request: Request, response: ResponseData): JsonNode =  
     result["request"]["reqMeth"] = newJString("connect")
   of HttpPatch:
     result["request"]["reqMeth"] = newJString("patch")
+  #
+  # parse environment variables
+  #
+  result["env"] = newJObject()
+  for k, v in envPairs():
+    result["env"][$k] = newJString($v)
+  #
+  # command line params (the params used to start the server)
+  #
+  result["commandLineParams"] = newJArray()
+  when declared(commandLineParams):
+    for parm in commandLineParams():
+      result["commandLineParams"].add newJString(parm)
 
 
-
-proc jsonDefault_after*(request: Request, response: ResponseData, data: JsonNode) = #SKIP!
-  # This is the "after" portion of the plugin. Do not run
+proc jsonDefault_route*(request: Request, response: ResponseData, data: JsonNode) = #SKIP!
+  # This is the "routeStart" portion of the plugin. Do not run
   # this procedure directly, it is used by the plugin itself.
-  discard
+  for k, v in request.params.pairs:
+    if not data["request"]["params"].hasKey(k):
+      data["request"]["params"][k] = newJString(v)
+

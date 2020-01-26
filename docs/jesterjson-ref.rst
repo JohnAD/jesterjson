@@ -1,34 +1,45 @@
-plugin Reference
+jesterjson Reference
 ==============================================================================
 
-The following are the references for JesterCookieMsgs plugin.
+The following are the references for jesterjson.
 
 
 
-Plugins
-=======
 
 
-.. _jsonDefault.plugin:
+
+Procs, Methods, Iterators
+=========================
+
+
+.. _jsonDefault.p:
 jsonDefault
 ---------------------------------------------------------
 
     .. code:: nim
 
-        jsonDefault*(): JsonNode =
+        proc jsonDefault*(request: Request, response: ResponseData): JsonNode =
+
+    source line: `61 <../src/jesterjson.nim#L61>`__
 
     This is the psuedo-procedure to invoke to enable the library plugin.
-
+    
     Once placed on the main router or ``routes``, the plugin is active on
     all page routes.
-
+    
     It creates a new object variable that is available to all routes including
     any ``extend``-ed subrouters.
-    
+
+
+
+
+
 
 
 Table Of Contents
 =================
 
 1. `Introduction to jesterjson <https://github.com/JohnAD/jesterjson>`__
-2. `plugin Reference <plugin-ref.rst>`__
+2. Appendices
+
+    A. `jesterjson Reference <jesterjson-ref.rst>`__

@@ -7,7 +7,6 @@
   "repo_support_url": "https://repo.support/gh/JohnAD/jesterjson",
   "doc_dir": "docs/",
   "rst_dir": "rst/",
-  "doc_src_dir": "extradocs/",
   "nimble_file": "jesterjson.nimble",
   "files_to_ignore": []
 }

@@ -48,7 +48,10 @@ A new JsonNode object is created and the following keys are setup in it:
     * j["request"]["path"] is a string of the requests URL path name
     * j["request"]["path"] is a string describing the request method (post, get, put, etc.)
 
-* j["env"] TBD (will eventually contain various environment variables)
+* j["env"] is an object of the OS environment variables
+
+* j["commandLineParams"] contains an array of the parameters passed to the server on startup
+
 
 
 
@@ -56,4 +59,6 @@ Table Of Contents
 =================
 
 1. `Introduction to jesterjson <https://github.com/JohnAD/jesterjson>`__
-2. `plugin Reference <plugin-ref.rst>`__
+2. Appendices
+
+    A. `jesterjson Reference <jesterjson-ref.rst>`__
