@@ -20,7 +20,7 @@ jsonDefault
 
         proc jsonDefault*(request: Request, response: ResponseData): JsonNode =
 
-    source line: `61 <../src/jesterjson.nim#L61>`__
+    source line: `68 <../src/jesterjson.nim#L68>`__
 
     This is the psuedo-procedure to invoke to enable the library plugin.
     

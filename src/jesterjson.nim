@@ -1,10 +1,12 @@
-import times
-import strutils
-import json
-import os
+import
+  times,
+  strutils,
+  json,
+  os,
+  base64
 
 import
-  jester
+  jesterwithplugins
 
 ## This is a plugin for the nim web
 ## framework `Jester <https://github.com/dom96/jester>`__. It creates a JSON
@@ -55,6 +57,11 @@ import
 ## * j["env"] is an object of the OS environment variables
 ##
 ## * j["commandLineParams"] contains an array of the parameters passed to the server on startup
+##
+## * j["encodedUrl"] is a base-64 hex string of the URL. Sometimes that is useful for tracking and redirection.
+##
+## * j["currentTime"] is a string contains a ``Time`` parsable version of the current time and date
+## * j["rfc2822"] is a string with current Time in RFC 2822 format.  See https://www.ietf.org/rfc/rfc2822.txt
 ##
 
 
@@ -112,6 +119,15 @@ proc jsonDefault*(request: Request, response: ResponseData): JsonNode =
   when declared(commandLineParams):
     for parm in commandLineParams():
       result["commandLineParams"].add newJString(parm)
+  #
+  # hex encoded version of the URL; useful in redirection scenarios
+  #
+  result["encodedUrl"] = newJString(base64.encode(request.path))
+  #
+  # parsable string of the current ``getTime``
+  #
+  result["currentTime"] = newJString($getTime())
+  result["rfc2822"] = newJString(getTime().format("ddd, dd MMM YYYY HH:mm:ss zz'00'"))
 
 
 proc jsonDefault_route*(request: Request, response: ResponseData, data: JsonNode) = #SKIP!

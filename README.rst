@@ -1,6 +1,6 @@
 Introduction to jesterjson
 ==============================================================================
-ver 1.0.0
+ver 1.0.1
 
 .. image:: https://raw.githubusercontent.com/yglukhov/nimble-tag/master/nimble.png
    :height: 34
@@ -63,6 +63,11 @@ A new JsonNode object is created and the following keys are setup in it:
 * j["env"] is an object of the OS environment variables
 
 * j["commandLineParams"] contains an array of the parameters passed to the server on startup
+
+* j["encodedUrl"] is a base-64 hex string of the URL. Sometimes that is useful for tracking and redirection.
+
+* j["currentTime"] is a string contains a ``Time`` parsable version of the current time and date
+* j["rfc2822"] is a string with current Time in RFC 2822 format.  See https://www.ietf.org/rfc/rfc2822.txt
 
 
 
